@@ -1,6 +1,6 @@
 require 'unirest'
 
-# IGDD API GAME SEARCH CONNECTION
+# IGDB API GAME SEARCH CONNECTION
 class ConnectionIGDB
   def initialize(params)
     response = Unirest.get 'https://igdbcom-internet-game-database-v1.p.mashape.com/games/',
