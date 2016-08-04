@@ -19,7 +19,7 @@ class LibrariesController < ProtectedController
   # POST /libraries
   # POST /libraries.json
   def create
-    @library = Library.new(library_params)
+    @library = current_user.libraries.build(library_params)
 
     if @library.save
       render json: @library, status: :created, location: @library
@@ -55,6 +55,6 @@ class LibrariesController < ProtectedController
   end
 
   def library_params
-    params.require(:library).permit(:user_id, :game_id, :done)
+    params.require(:library).permit(:game_id, :user_id, :done)
   end
 end

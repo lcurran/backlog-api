@@ -8,8 +8,13 @@ class CatalogsController < ProtectedController
   end
 
   # POST add game to user library
-  def post
-    @game = Game.find()
+  def create
+    @game = Game.create(game_params)
+    if @game.valid?
+      render json: @game, status: :created
+    else
+      render json: Game.find(game_params[:name])
+    end
   end
 
   private
@@ -31,5 +36,6 @@ class CatalogsController < ProtectedController
   end
 
   def game_params
+    params.require(:catalog).permit(:igdb_id, :name, :summary, :cover, :video)
   end
 end

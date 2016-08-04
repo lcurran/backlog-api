@@ -18,12 +18,11 @@ class GamesController < OpenReadController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
-
-    if @game.save
+    @game = Game.create(game_params)
+    if @game.valid?
       render json: @game, status: :created, location: @game
     else
-      render json: Game.find(game_params[:igdb_id])
+      render json: Game.where("name = :name", { name: game_params[:name] })
     end
   end
 
@@ -54,6 +53,6 @@ class GamesController < OpenReadController
     end
 
     def game_params
-      params[:game]
+      params.require(:game).permit(:igdb_id, :name, :summary, :cover, :video)
     end
 end
