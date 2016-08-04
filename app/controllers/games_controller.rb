@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+class GamesController < OpenReadController
   before_action :set_game, only: [:show, :update, :destroy]
 
   # GET /games
@@ -23,7 +23,7 @@ class GamesController < ApplicationController
     if @game.save
       render json: @game, status: :created, location: @game
     else
-      render json: @game.errors, status: :unprocessable_entity
+      render json: Game.find(game_params[:igdb_id])
     end
   end
 

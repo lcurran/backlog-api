@@ -1,32 +1,15 @@
 # Controls interactions between the user, IGDB API and Game DB
 class CatalogsController < ProtectedController
-  skip_before_action :authenticate, only: [:search]
+  skip_before_action :authenticate, only: [:index]
 
   # GET /search to IGDB
-  def search
-    @query = ConnectionIGDB.new(search_param)
-
-    if @query.response.code == 200
-      render json: @query.response.body
-    else
-      render json: @query.errors
-    end
+  def index
+    render json: ConnectionIGDB.new(params[:search]).result
   end
 
-  # POST /addgame
-  def addgame
-    if Game.find(@game[:igdb_id])
-      @newlib = Library.new(@library)
-    else
-      @newgame = Game.new(@game)
-      @newlib = Library.new(current_user[:id], @newgame[:id])
-    end
-    
-    if @newlib.save
-      render json: @library, status: :created, location: @library
-    else
-      render json: @library.errors, status: :unprocessable_entity
-    end
+  # POST add game to user library
+  def post
+    @game = Game.find()
   end
 
   private
@@ -45,5 +28,8 @@ class CatalogsController < ProtectedController
 
   def catalog_params
     params.require(:catalog).permit(:user_id, :games_id, :igdb_id)
+  end
+
+  def game_params
   end
 end

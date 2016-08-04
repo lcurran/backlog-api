@@ -5,6 +5,16 @@ class GameSerializer < ActiveModel::Serializer
              :name,
              :summary,
              :storyline,
-             :videos,
-             :cover
+             :video,
+             :cover,
+             :users,
+             :libraries
+
+  def users
+    object.users.pluck(:id)
+  end
+
+  def libraries
+    object.libraries.pluck(:id)
+  end
 end

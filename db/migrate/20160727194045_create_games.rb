@@ -6,7 +6,7 @@ class CreateGames < ActiveRecord::Migration
       t.string :name, null: false, index: { unique: true }
       t.string :summary
       t.string :storyline
-      t.text :videos
+      t.text :video
       t.text :cover
       t.timestamps null: false
     end

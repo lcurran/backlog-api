@@ -1,11 +1,11 @@
-# Default controller for join table between Users and Games
-class LibrariesController < OpenReadController
+#
+class LibrariesController < ProtectedController
   before_action :set_library, only: [:show, :update, :destroy]
 
   # GET /libraries
   # GET /libraries.json
   def index
-    @libraries = Library.all
+    @libraries = current_user.libraries.all
 
     render json: @libraries
   end
@@ -50,11 +50,11 @@ class LibrariesController < OpenReadController
 
   private
 
-    def set_library
-      @library = Library.find(params[:id])
-    end
+  def set_library
+    @library = Library.find(params[:id])
+  end
 
-    def library_params
-      params.require(:library).permit(:user_id, :game_id)
-    end
+  def library_params
+    params.require(:library).permit(:user_id, :game_id, :done)
+  end
 end
