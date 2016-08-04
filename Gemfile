@@ -11,7 +11,7 @@ gem 'unirest'
 gem "figaro"
 
 group :production do
-  gem 'rails_12factor', '~> 0.0.3'
+  gem 'rails_12factor'
 end
 
 group :development, :test do

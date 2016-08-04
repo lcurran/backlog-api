@@ -173,7 +173,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 4.2.6)
   rails-api
-  rails_12factor (~> 0.0.3)
+  rails_12factor
   rb-readline
   rspec (~> 3.4.0)
   rspec-rails (~> 3.4.2)
