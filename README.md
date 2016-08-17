@@ -13,9 +13,9 @@ An API for a game library tracking client.
 
 Backlog is a web application that allows a user to keep track of the video games they own.  The front end client is a single page application built in Ember.js.  The client has search functionality that allows the user to search a massive database of video games, provided by the IGDB database, via my API.
 
-The API is built in Ruby on Rails with a SQL server.  I used the [Unirest.io](http://unirest.io/ruby.html) gem to add an HTTP request to the third party, IGDB API.  The HTTP request is wrapped in a model, with a custom method that cleans and formats the data returned by IGDB.  
+The API is built in Ruby on Rails with a SQL server.  I used the [Unirest.io](http://unirest.io/ruby.html) gem to add an HTTP request to the third party, IGDB API.  The HTTP request is wrapped in a model, with a custom method that cleans and formats the data returned by IGDB.  (this code can be found in the app/models/connection_igdb.rb file)
 
-The catalog controller handles any requests from the client that required customization beyond the standard Rails conventions.  
+The catalog controller handles any requests from the client that required customization beyond the standard Rails conventions.  (see app/controllers/catalogs_controller.rb)
 
 The index method handles the search functionality, and triggers a request to the IGDB API by initializing a new instance of the Connection_IGDB class, which contains the HTTP request, and calling the custom method that processes the returned data.
 
